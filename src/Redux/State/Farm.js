@@ -21,6 +21,7 @@ export const SEEDS_TYPES = [
 // actions types
 export const ADD_FIELD = '@farm-mariondz/Farm/ADD_FIELD';
 export const PLANT_SEEDS = '@farm-mariondz/Farm/PLANT_SEEDS';
+export const HARVEST = '@farm-mariondz/Farm/HARVEST'
 
 // actions creators
 export const addField = () => ({ type: ADD_FIELD })
@@ -34,6 +35,12 @@ export const addField = () => ({ type: ADD_FIELD })
 export const plantSeeds = (fieldId, seedType) => ({
     type: PLANT_SEEDS,
     seedType,
+    fieldId,
+})
+
+// harvest :: Number -> Action
+export const harvest = fieldId => ({
+    type : HARVEST,
     fieldId,
 })
 
@@ -55,8 +62,7 @@ export default (state = INITIAL_STATE, action = {}) => {
         })
     }
 
-    if(action.type === PLANT_SEEDS){
-        
+    if (action.type === PLANT_SEEDS){
         return ({
             ...state,
             gold : state.gold - action.seedType.buyPrice,
@@ -64,6 +70,21 @@ export default (state = INITIAL_STATE, action = {}) => {
                 ? {
                     ...field,
                     seedType : action.seedType,
+                }
+                : field
+            )
+        })
+    }
+
+    if(action.type === HARVEST){
+        const field = state.fields.find(field => field.id === action.fieldId)
+        return ({
+            ...state,
+            gold : state.gold + field.seedType.sellPrice,
+            fields : state.fields.map(field => field.id === action.fieldId
+                ? {
+                    ...field,
+                    seedType : null,
                 }
                 : field
             )
