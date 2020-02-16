@@ -5,6 +5,7 @@ import { addField } from './../../Redux/State/Farm'
 // mapStateToProps :: State -> Props
 const mapStateToProps = state => ({
     nbFields: state.Farm.fields,
+    gold: state.Farm.gold
 })
 
 // mapDispatchToProps :: Dispatch -> Props

@@ -4,12 +4,12 @@ import './Field.css'
 export default ({
     plantSeeds,
     seedTypes,
-    plantedSeeds
+    field
 }) =>
-    <div data-is="field" className={plantedSeeds !== null ? plantedSeeds : ""}>
+    <div data-is="field" className={field.seedType !== null ? field.seedType.name : ""}>
         <form onSubmit={plantSeeds}>
             <select name='seeds'>
-                {seedTypes.map(type => <option key={type.name} value={type.name}>{type.name}</option>)}
+                {seedTypes.map(type => <option key={type.name} value={type.name}>{type.name} : {type.buyPrice}</option>)}
             </select>
             <button>Plant</button>
         </form>        

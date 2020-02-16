@@ -2,19 +2,29 @@ import Field from './Field'
 import { connect } from 'react-redux'
 import { plantSeeds, SEEDS_TYPES } from './../../Redux/State/Farm'
 
+//findSeed :: (String, [SeedType]) -> SeedType
+const findSeed = (seedName, seedTypes)=>
+    seedTypes.find(seed => seed.name === seedName)
+
+
 // mapStateToProps :: State -> Props
 const mapStateToProps = (state, ownProps) => ({
     seedTypes : SEEDS_TYPES,
-    plantedSeeds: state.Farm.fields.find(
+    field: state.Farm.fields.find(
         field => field.id === ownProps.id
-    ).seedType,
+    ),
 })
 
 // mapDispatchToProps :: (Dispatch, Props) -> Props
 const mapDispatchToProps = (dispatch, ownProps) => ({
     plantSeeds: event => {
         event.preventDefault();
-        dispatch(plantSeeds(ownProps.id, event.target.seeds.value))
+        dispatch(
+            plantSeeds(
+                ownProps.id, 
+                findSeed(event.target.seeds.value, SEEDS_TYPES)
+                )
+            )
     },
 })
 

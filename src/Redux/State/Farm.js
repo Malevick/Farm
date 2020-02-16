@@ -1,17 +1,20 @@
 // initial state
 export const INITIAL_STATE = {
     fields: [],
+    gold: 100
 }
 export const SEEDS_TYPES = [
     {
         name : "wheat",
         cropTime : 1,
-        sellPrice : 5
+        sellPrice : 5,
+        buyPrice : 2,
     },
     {
         name : "corn",
         cropTime : 2,
-        sellPrice : 12
+        sellPrice : 12,
+        buyPrice : 4,
     },
 ]
 
@@ -53,8 +56,10 @@ export default (state = INITIAL_STATE, action = {}) => {
     }
 
     if(action.type === PLANT_SEEDS){
+        
         return ({
             ...state,
+            gold : state.gold - action.seedType.buyPrice,
             fields : state.fields.map(field => field.id === action.fieldId
                 ? {
                     ...field,
