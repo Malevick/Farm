@@ -1,0 +1,9 @@
+[data-is="farm"]{
+    margin: 10px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border: 2px white solid;
+}
