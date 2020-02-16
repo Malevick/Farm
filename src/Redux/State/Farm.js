@@ -15,11 +15,6 @@ export const SEEDS_TYPES = [
     },
 ]
 
-export const FIELD_INITIAL_STATE = {
-    id: null,
-    seedType: null,
-}
-
 // actions types
 export const ADD_FIELD = '@farm-mariondz/Farm/ADD_FIELD';
 export const PLANT_SEEDS = '@farm-mariondz/Farm/PLANT_SEEDS';
@@ -47,25 +42,26 @@ export default (state = INITIAL_STATE, action = {}) => {
     if (action.type === ADD_FIELD) {
         return ({
             ...state,
-            fields: [...state.fields, {
-                id : state.fields.length
-            }],
+            fields: [
+                ...state.fields,
+                {
+                    id : state.fields.length,
+                    seedType: null,
+                }
+            ],
         })
     }
 
     if(action.type === PLANT_SEEDS){
         return ({
             ...state,
-            fields : state.fields.map((field)=>{
-                if(field.id === action.fieldId){
-                    return {
-                        ...field, 
-                        seedType : action.seedType
-                    }
+            fields : state.fields.map(field => field.id === action.fieldId
+                ? {
+                    ...field,
+                    seedType : action.seedType,
                 }
-
-                return field;
-            })
+                : field
+            )
         })
     }
 
