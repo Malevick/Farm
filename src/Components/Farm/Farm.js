@@ -1,14 +1,15 @@
 import React from 'react'
 import Field from '../Field/'
 
-
-
 export default ({
-    addField
+    addField,
+    nbFields
 }) =>
     <div data-is="farm">
         <Field/>
-        <button onClick={addField}>
-            Add field
-        </button>
+        {nbFields < 5 && 
+            <button onClick={addField}>
+                Add field
+            </button>
+        }
     </div>
