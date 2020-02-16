@@ -32,10 +32,11 @@ export const addField = () => ({ type: ADD_FIELD })
 //    sellPrice :: Number
 // }
 //
-// plantSeeds :: SeedType -> Action
-export const plantSeeds = seedType => ({
+// plantSeeds :: (Number, SeedType) -> Action
+export const plantSeeds = (fieldId, seedType) => ({
     type: PLANT_SEEDS,
     seedType,
+    fieldId,
 })
 
 // Farm :: (State, Action *) -> State
@@ -49,6 +50,22 @@ export default (state = INITIAL_STATE, action = {}) => {
             fields: [...state.fields, {
                 id : state.fields.length
             }],
+        })
+    }
+
+    if(action.type === PLANT_SEEDS){
+        return ({
+            ...state,
+            fields : state.fields.map((field)=>{
+                if(field.id === action.fieldId){
+                    return {
+                        ...field, 
+                        seedType : action.seedType
+                    }
+                }
+
+                return field;
+            })
         })
     }
 

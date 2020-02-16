@@ -9,7 +9,7 @@ export default ({
 }) =>
     <fieldset data-is="farm">
         <legend>The Farm</legend>
-        { nbFields.map((field) => <Field key={field.id}/>) }
+        { nbFields.map((field) => <Field key={field.id} id={field.id}/>) }
         {console.warn(nbFields)}
         { nbFields.length < 6 && 
             <button onClick={addField}>
