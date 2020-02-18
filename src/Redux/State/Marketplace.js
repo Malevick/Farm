@@ -2,14 +2,26 @@ export const SEEDS_TYPES = [
     {
         name : "wheat",
         cropTime : 1,
-        sellPrice : 5,
-        buyPrice : 2,
+        sellPrice : 3,
+        buyPrice : 1,
+        waterRequirements : 3,
+        color: '#F5DEB3'
     },
     {
         name : "corn",
         cropTime : 2,
-        sellPrice : 12,
-        buyPrice : 4,
+        sellPrice : 11,
+        buyPrice : 3,
+        waterRequirements : 9,
+        color: '#FBEC5D'
+    },
+    {
+        name : "barley",
+        cropTime : 3,
+        sellPrice : 20,
+        buyPrice : 5,
+        waterRequirements : 15,
+        color: '#db8626'
     },
 ]
 

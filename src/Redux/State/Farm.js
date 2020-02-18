@@ -1,13 +1,20 @@
 // initial state
 export const INITIAL_STATE = {
-    fields: [],
-    gold: 100
+    fields: [
+        {
+            id : 1,
+            seedType: null,
+            currentWateringLevel: 0
+        }
+    ],
+    gold: 30
 }
 
 // actions types
 export const ADD_FIELD = '@farm-mariondz/Farm/ADD_FIELD';
 export const PLANT_SEEDS = '@farm-mariondz/Farm/PLANT_SEEDS';
-export const HARVEST = '@farm-mariondz/Farm/HARVEST'
+export const HARVEST = '@farm-mariondz/Farm/HARVEST';
+export const WATERING = '@farm-mariondz/Farm/WATERING';
 
 // actions creators
 export const addField = () => ({ type: ADD_FIELD })
@@ -32,6 +39,12 @@ export const harvest = fieldId => ({
     fieldId,
 })
 
+// watering :: Number -> Action
+export const watering = fieldId => ({
+    type : WATERING,
+    fieldId,
+})
+
 // Farm :: (State, Action *) -> State
 export default (state = INITIAL_STATE, action = {}) => {
     console.warn(state)
@@ -40,11 +53,13 @@ export default (state = INITIAL_STATE, action = {}) => {
     if (action.type === ADD_FIELD) {
         return ({
             ...state,
+            gold : state.gold - 50,
             fields: [
                 ...state.fields,
                 {
-                    id : state.fields.length,
+                    id : state.fields.length + 1,
                     seedType: null,
+                    currentWateringLevel: 0,
                 }
             ],
         })
@@ -73,11 +88,27 @@ export default (state = INITIAL_STATE, action = {}) => {
                 ? {
                     ...field,
                     seedType : null,
+                    currentWateringLevel: 0,
                 }
                 : field
             )
         })
     }
+
+    if(action.type === WATERING){
+        return ({
+            ...state,
+            fields : state.fields.map(field => field.id === action.fieldId
+                ? {
+                    ...field,
+                    currentWateringLevel: field.currentWateringLevel + 1,
+                }
+                : field
+            )
+        })
+    }
+       
+    
 
     return state
 }

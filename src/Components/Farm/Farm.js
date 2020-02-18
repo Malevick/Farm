@@ -10,11 +10,16 @@ export default ({
 }) =>
     <fieldset data-is="farm">
         <legend>The Farm</legend>
-        <p>money : {gold}</p>
+        <nav>
+            <ol>
+                <li>Money : {gold}</li>
+                { (fields.length < 6 && gold > 50) && 
+                    <li onClick={addField} className='actionAvailable'>
+                        Add field
+                    </li>
+                }
+            </ol>
+        </nav>
         { fields.map(field => <Field key={field.id} id={field.id}/>) }
-        { fields.length < 6 && 
-            <button onClick={addField}>
-                Add field
-            </button>
-        }
+        
     </fieldset>
