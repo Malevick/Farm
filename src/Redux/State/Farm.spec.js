@@ -65,6 +65,7 @@ describe('Redux :: State :: Farm', () => {
             ],
             gold: 100
         }
+
         const s2 = {
             fields: [
                 {
@@ -74,6 +75,7 @@ describe('Redux :: State :: Farm', () => {
             ],
             gold: 105
         }
+        
         expect(
             reducer(s1, harvest(0))
         ).toEqual(s2)

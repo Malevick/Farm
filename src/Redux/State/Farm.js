@@ -3,20 +3,6 @@ export const INITIAL_STATE = {
     fields: [],
     gold: 100
 }
-export const SEEDS_TYPES = [
-    {
-        name : "wheat",
-        cropTime : 1,
-        sellPrice : 5,
-        buyPrice : 2,
-    },
-    {
-        name : "corn",
-        cropTime : 2,
-        sellPrice : 12,
-        buyPrice : 4,
-    },
-]
 
 // actions types
 export const ADD_FIELD = '@farm-mariondz/Farm/ADD_FIELD';
@@ -27,8 +13,10 @@ export const HARVEST = '@farm-mariondz/Farm/HARVEST'
 export const addField = () => ({ type: ADD_FIELD })
 
 // @type SeedType {
+//    name :: String,
 //    cropTime :: Number,
-//    sellPrice :: Number
+//    sellPrice :: Number,
+//    buyPrice :: Number
 // }
 //
 // plantSeeds :: (Number, SeedType) -> Action

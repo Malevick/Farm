@@ -6,8 +6,8 @@
     margin: 10px;
 }
 [data-is = 'field'].corn{
-    background-color: rgb(255, 255, 98);
+    background-color: #FBEC5D;
 }
 [data-is = 'field'].wheat{
-    background-color: goldenrod;
+    background-color: #F5DEB3;
 }

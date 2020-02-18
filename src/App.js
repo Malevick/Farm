@@ -5,6 +5,7 @@ import { Provider } from 'react-redux'
 import rootReducer from './Redux/State'
 import { createStore } from 'redux'
 
+// App :: () -> React.Component
 const store = createStore(rootReducer)
 
 export default ()=>
