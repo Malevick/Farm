@@ -1,4 +1,4 @@
-export const SEEDS_TYPES = [
+export const SEED_TYPES = [
     {
         name : "wheat",
         cropTime : 1,
@@ -27,7 +27,7 @@ export const SEEDS_TYPES = [
 
 // initial state
 export const INITIAL_STATE = {
-    seedTypes : SEEDS_TYPES
+    seedTypes : SEED_TYPES
 }
 
 

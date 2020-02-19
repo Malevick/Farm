@@ -1,74 +1,57 @@
 import React from 'react'
 import './Field.css'
 
-const showField = (
-    field, 
-    harvest, 
-    seedTypes, 
-    plantSeeds,
-    watering
-)=>{ 
-    if(field.seedType !== null ){
 
-        if(field.currentWateringLevel < field.seedType.waterRequirements){
-            return (
+const waterOrHarvest = (field, harvest, water) => (
+    <div>
+        <span>{field.seedType.name}</span>
+        {field.wateringLevel < field.seedType.waterRequirements 
+            ?
                 <div>
-                    <span>{field.seedType.name}</span>
                     <div className='tank'>
-                        <div className='water' style={{width: (field.currentWateringLevel * 100 / field.seedType.waterRequirements) + '%'}}></div>
+                        <div className='water' style={{width: (field.wateringLevel * 100 / field.seedType.waterRequirements) + '%'}}></div>
                     </div>
-                    <button onClick={watering} className='actionAvailable'>
-                        Watering
+                    <button onClick={water} className='action-available'>
+                        Water
                     </button>
                 </div>
-                
-            )
+            :
+                <button onClick={harvest} className='action-available' >
+                    Harvest
+                </button> 
         }
-
-        else{
-            return (
-                <div>
-                    <span>{field.seedType.name}</span>
-                    <button onClick={harvest} className='actionAvailable' >
-                        Harvest
-                    </button> 
-                </div>
-            )
-        }
-    }
-
-    else{
-        return (
-            <form onSubmit={plantSeeds}>
-                <select name='seeds'>
-                    {seedTypes.map(
-                        type => 
-                            <option key={type.name} value={type.name}>
-                                {type.name} ({type.buyPrice})
-                            </option>
-                        )}
-                </select>
-                <button className='actionAvailable'>Plant</button>
-            </form>
-        )
-    }
-}
+    </div>
+)
 
 export default ({
     plantSeeds,
     seedTypes,
     field,
     harvest,
-    watering
+    water
 }) =>
     <div data-is="field">
-        <div className={field.seedType !== null ? field.seedType.name + ' fieldColor': undefined} 
+        <div className={field.seedType !== null ? field.seedType.name + ' field-content':  'field-content'} 
             style={{
-                backgroundColor: field.seedType !== null ? field.seedType.color : 'transparent', 
-                opacity: field.seedType !== null ? (field.currentWateringLevel / field.seedType.waterRequirements) : 0
+                opacity: field.seedType !== null ? (field.wateringLevel / field.seedType.waterRequirements) : 0
             }}>
         </div>
-        <div className='fieldMenu'>
-            {showField(field, harvest, seedTypes, plantSeeds, watering)}
+        <div className='field-menu'>
+            {field.seedType === null 
+                ?
+                <form onSubmit={plantSeeds}>
+                    <select name='seeds'>
+                        {seedTypes.map(
+                            type => 
+                                <option key={type.name} value={type.name}>
+                                    {type.name} ({type.buyPrice})
+                                </option>
+                            )}
+                    </select>
+                    <button className='action-available'>Plant</button>
+                </form>
+                :
+                waterOrHarvest(field, harvest, water)
+            }
         </div>
     </div>

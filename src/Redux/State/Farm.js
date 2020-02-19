@@ -1,20 +1,22 @@
 // initial state
 export const INITIAL_STATE = {
+    fieldBuyPrice: 50,
     fields: [
         {
             id : 1,
             seedType: null,
-            currentWateringLevel: 0
+            wateringLevel: 0,
         }
     ],
-    gold: 30
+    gold: 30,
+    maxFields : 5,
 }
 
 // actions types
-export const ADD_FIELD = '@farm-mariondz/Farm/ADD_FIELD';
-export const PLANT_SEEDS = '@farm-mariondz/Farm/PLANT_SEEDS';
-export const HARVEST = '@farm-mariondz/Farm/HARVEST';
-export const WATERING = '@farm-mariondz/Farm/WATERING';
+export const ADD_FIELD =    '@farm-mariondz/Farm/ADD_FIELD';
+export const PLANT_SEEDS =  '@farm-mariondz/Farm/PLANT_SEEDS';
+export const HARVEST =      '@farm-mariondz/Farm/HARVEST';
+export const WATER =        '@farm-mariondz/Farm/WATER';
 
 // actions creators
 export const addField = () => ({ type: ADD_FIELD })
@@ -39,9 +41,9 @@ export const harvest = fieldId => ({
     fieldId,
 })
 
-// watering :: Number -> Action
-export const watering = fieldId => ({
-    type : WATERING,
+// water :: Number -> Action
+export const water = fieldId => ({
+    type : WATER,
     fieldId,
 })
 
@@ -53,13 +55,13 @@ export default (state = INITIAL_STATE, action = {}) => {
     if (action.type === ADD_FIELD) {
         return ({
             ...state,
-            gold : state.gold - 50,
+            gold : state.gold - state.fieldBuyPrice,
             fields: [
                 ...state.fields,
                 {
                     id : state.fields.length + 1,
                     seedType: null,
-                    currentWateringLevel: 0,
+                    wateringLevel: 0,
                 }
             ],
         })
@@ -88,27 +90,25 @@ export default (state = INITIAL_STATE, action = {}) => {
                 ? {
                     ...field,
                     seedType : null,
-                    currentWateringLevel: 0,
+                    wateringLevel: 0,
                 }
                 : field
             )
         })
     }
 
-    if(action.type === WATERING){
+    if(action.type === WATER){
         return ({
             ...state,
             fields : state.fields.map(field => field.id === action.fieldId
                 ? {
                     ...field,
-                    currentWateringLevel: field.currentWateringLevel + 1,
+                    wateringLevel: field.wateringLevel + 1,
                 }
                 : field
             )
         })
     }
        
-    
-
     return state
 }

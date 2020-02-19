@@ -5,16 +5,18 @@ import './Farm.css'
 // Farm :: Props -> React.Component
 export default ({
     addField,
+    fieldBuyPrice,
     fields,
-    gold
+    gold,
+    maxFields,
 }) =>
     <fieldset data-is="farm">
         <legend>The Farm</legend>
         <nav>
             <ol>
                 <li>Money : {gold}</li>
-                { (fields.length < 6 && gold > 50) && 
-                    <li onClick={addField} className='actionAvailable'>
+                { (fields.length < maxFields && gold > fieldBuyPrice) && 
+                    <li onClick={addField} className='action-available'>
                         Add field
                     </li>
                 }

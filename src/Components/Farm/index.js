@@ -4,8 +4,10 @@ import { addField } from './../../Redux/State/Farm'
 
 // mapStateToProps :: State -> Props
 const mapStateToProps = state => ({
+    fieldBuyPrice : state.Farm.fieldBuyPrice,
     fields: state.Farm.fields,
-    gold: state.Farm.gold
+    gold: state.Farm.gold,
+    maxFields : state.Farm.maxFields,
 })
 
 // mapDispatchToProps :: Dispatch -> Props
