@@ -1,8 +1,21 @@
 import React from 'react'
 import Field from '../Field/'
 import './Farm.css'
+/**
+ * @typedef {import('../../Redux/State/Farm').addField} addField
+ * @typedef {import('../../Redux/State/Farm').Field} Field
+ */
 
-// Farm :: Props -> React.Component
+/**
+ * Farm :: Props -> React.Component
+ * @param {{
+    *      addField : addField,
+    *      fieldBuyPrice : Number, 
+    *      fields : [Field],
+    *      gold : Number,
+    *      maxFields : Number
+    * }}
+*/
 export default ({
     addField,
     fieldBuyPrice,
