@@ -22,10 +22,11 @@ export const WATER =        '@farm-mariondz/Farm/WATER';
 export const addField = () => ({ type: ADD_FIELD })
 
 // @type SeedType {
-//    name :: String,
-//    cropTime :: Number,
-//    sellPrice :: Number,
-//    buyPrice :: Number
+//    name : string,
+//    cropTime : int,
+//    sellPrice : int,
+//    buyPrice : int,
+//    waterRequirements : int
 // }
 //
 // plantSeeds :: (Number, SeedType) -> Action

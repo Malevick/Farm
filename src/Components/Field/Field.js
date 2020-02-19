@@ -1,7 +1,6 @@
 import React from 'react'
 import './Field.css'
 
-
 const waterOrHarvest = (field, harvest, water) => (
     <div>
         <span>{field.seedType.name}</span>

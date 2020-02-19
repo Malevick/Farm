@@ -23,5 +23,4 @@ export default ({
             </ol>
         </nav>
         { fields.map(field => <Field key={field.id} id={field.id}/>) }
-        
     </fieldset>

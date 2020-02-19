@@ -8,6 +8,7 @@
     border: 2px white solid;
     max-width: calc(340px*3) ;
 }
+
 [data-is="farm"] legend {
     color: rgb(255, 184, 53);
     font-size: 18px;
@@ -41,4 +42,3 @@
     color: rgb(255, 241, 215);
     border-bottom: 2px dotted rgb(255, 241, 215);
 }
-

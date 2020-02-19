@@ -14,4 +14,3 @@ export default ()=>
         <Farm />
       </Provider>
     </div>
-

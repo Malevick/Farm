@@ -2,12 +2,13 @@ import {
     INITIAL_STATE,
     default as reducer,
     addField,
-    plantSeeds,
     harvest,
+    plantSeeds,
     water,
 } from './Farm'
 
 describe('Redux :: State :: Farm', () => {
+
     it('reduces to initial state by default', () => {
 
         expect(
@@ -76,9 +77,11 @@ describe('Redux :: State :: Farm', () => {
         expect(
             reducer(s1, plantSeeds(1, {buyPrice : 4,}))
         ).toEqual(s2)
+
     })
 
     it('reduces harvest action', ()=>{
+
         const s1 = {
             fields: [
                 {
@@ -106,9 +109,11 @@ describe('Redux :: State :: Farm', () => {
         expect(
             reducer(s1, harvest(0))
         ).toEqual(s2)
+
     })
 
     it('reduces water action', ()=>{
+
         const s1 = {
             fields: [
                 {
@@ -130,6 +135,7 @@ describe('Redux :: State :: Farm', () => {
         expect(
             reducer(s1, water(1))
         ).toEqual(s2)
+
     })
 
 })
