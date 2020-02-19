@@ -4,7 +4,7 @@ import './Field.css'
 const waterOrHarvest = (field, harvest, water) => (
     <div>
         <span>{field.seedType.name}</span>
-        {field.wateringLevel < field.seedType.waterRequirements 
+        {field.wateringLevel < field.seedType.waterRequirements
             ?
                 <div>
                     <div className='tank'>
@@ -17,7 +17,7 @@ const waterOrHarvest = (field, harvest, water) => (
             :
                 <button onClick={harvest} className='action-available' >
                     Harvest
-                </button> 
+                </button>
         }
     </div>
 )
@@ -30,18 +30,18 @@ export default ({
     water
 }) =>
     <div data-is="field">
-        <div className={field.seedType !== null ? field.seedType.name + ' field-content':  'field-content'} 
+        <div className={field.seedType !== null ? field.seedType.name + ' field-content':  'field-content'}
             style={{
                 opacity: field.seedType !== null ? (field.wateringLevel / field.seedType.waterRequirements) : 0
             }}>
         </div>
         <div className='field-menu'>
-            {field.seedType === null 
+            {field.seedType === null
                 ?
-                <form onSubmit={plantSeeds}>
+                <form onSubmit={plantSeeds(seedTypes)}>
                     <select name='seeds'>
                         {seedTypes.map(
-                            type => 
+                            type =>
                                 <option key={type.name} value={type.name}>
                                     {type.name} ({type.buyPrice})
                                 </option>
