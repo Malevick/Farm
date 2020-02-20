@@ -1,4 +1,19 @@
-// initial state
+/**
+ * Seed Object
+ * @typedef {Object} Seed
+ * @property {string} name
+ * @property {Number} cropTime
+ * @property {Number} sellPrice
+ * @property {Number} buyPrice
+ * @property {Number} waterRequirements
+ */
+
+/**
+ * Marketplace initial state
+ * @typedef {Object} Marketplace
+ * @property {[Seed]} seedTypes
+ */
+
 export const INITIAL_STATE = {
     seedTypes : [
         {
@@ -25,6 +40,9 @@ export const INITIAL_STATE = {
     ]
 }
 
+/**
+ * @param {Marketplace} state
+ */
 export default (state = INITIAL_STATE, action = {}) => {
     console.warn(state)
     console.warn(action)

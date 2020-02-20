@@ -1,6 +1,21 @@
 import React from 'react'
 import './Field.css'
 
+/**
+ * @typedef {import('../../Redux/State/Farm').Field} Field
+ * @typedef {import('./../../Redux/State/Farm').harvest} harvest
+ * @typedef {import('./../../Redux/State/Farm').water} water
+ * @typedef {import('../../Redux/State/Marketplace').Seed} Seed
+ * @typedef {import('./../../Redux/State/Farm').plantSeeds} plantSeeds
+ */
+
+/**
+ * waterOrHarvest :: (Field, Action, Action) -> Element
+ * @param {Field} field
+ * @param {harvest} harvest
+ * @param {water} water
+ * @returns {JSX.Element}
+ */
 const waterOrHarvest = (field, harvest, water) => (
     <div>
         <span>{field.seedType.name}</span>
@@ -22,6 +37,16 @@ const waterOrHarvest = (field, harvest, water) => (
     </div>
 )
 
+/**
+ * @param {{
+    * plantSeeds : plantSeeds,
+    * seedTypes : [Seed],
+    * field : Field,
+    * harvest : harvest,
+    * water : water,
+ * }}
+ * @returns {JSX.Element}
+ */
 export default ({
     plantSeeds,
     seedTypes,
