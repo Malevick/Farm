@@ -25,11 +25,13 @@ const waterOrHarvest = (field, harvest, water) => (
                     <div className='tank'>
                         <div className='water' style={{width: (field.wateringLevel * 100 / field.seedType.waterRequirements) + '%'}}></div>
                     </div>
-                    <button onClick={water} className='action-available'>
-                        Water
-                    </button>
+                    {!field.isGrowing &&
+                        <button onClick={water} className='action-available'>
+                            Water
+                        </button>
+                    }
                 </div>
-            :
+            : !field.isGrowing &&
                 <button onClick={harvest} className='action-available' >
                     Harvest
                 </button>

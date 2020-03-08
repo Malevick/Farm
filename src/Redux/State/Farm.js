@@ -13,7 +13,7 @@
 /**
  * Initial state of Farm
  * @typedef {Object} Farm
- * @property {Number} fieldBuyPrice 
+ * @property {Number} fieldBuyPrice
  * @property {[Field]} fields
  * @property {Number} gold
  * @property {Number} maxFields
@@ -25,6 +25,7 @@ export const INITIAL_STATE = {
             id : 1,
             seedType: null,
             wateringLevel: 0,
+            isGrowing: false,
         }
     ],
     gold: 30,
@@ -36,6 +37,7 @@ export const ADD_FIELD =    '@farm-mariondz/Farm/ADD_FIELD';
 export const PLANT_SEEDS =  '@farm-mariondz/Farm/PLANT_SEEDS';
 export const HARVEST =      '@farm-mariondz/Farm/HARVEST';
 export const WATER =        '@farm-mariondz/Farm/WATER';
+export const HAS_GROWN =    '@farm-mariondz/Farm/HAS_GROWN';
 
 // actions creators
 /**
@@ -47,8 +49,8 @@ export const addField = () => ({ type: ADD_FIELD })
 
 /**
  * plantSeeds :: (Number, SeedType) -> Action
- * @param {Number} fieldId 
- * @param {Seed} seedType 
+ * @param {Number} fieldId
+ * @param {Seed} seedType
  * @returns {{
     * type : PLANT_SEEDS,
     * seedType : Seed,
@@ -64,10 +66,10 @@ export const plantSeeds = (fieldId, seedType) => ({
 
 /**
  * harvest :: Number -> Action
- * @param {Number} fieldId 
+ * @param {Number} fieldId
  * @returns {{
     * type : HARVEST,
-    * field : Number 
+    * field : Number
  * }}
  *  @callback harvest
  */
@@ -78,15 +80,20 @@ export const harvest = fieldId => ({
 
 /**
  * water :: Number -> Action
- * @param {Number} fieldId 
+ * @param {Number} fieldId
  * @returns {{
     * type : WATER,
-    * fieldId : Number 
+    * fieldId : Number
  * }}
  *  @callback water
  */
 export const water = fieldId => ({
     type : WATER,
+    fieldId,
+})
+
+export const hasGrown = fieldId => ({
+    type: HAS_GROWN,
     fieldId,
 })
 
@@ -96,7 +103,7 @@ export const water = fieldId => ({
  * @param {addField|harvest|plantSeeds|water} action
  */
 export default (state = INITIAL_STATE, action = {}) => {
-    console.warn(state)
+    // console.warn(state)
     console.warn(action)
 
     if (action.type === ADD_FIELD) {
@@ -105,10 +112,12 @@ export default (state = INITIAL_STATE, action = {}) => {
             gold : state.gold - state.fieldBuyPrice,
             fields: [
                 ...state.fields,
+                // @TODO c'est de la merde
                 {
                     id : state.fields.length + 1,
                     seedType: null,
                     wateringLevel: 0,
+                    isGrowing: false,
                 }
             ],
         })
@@ -151,11 +160,25 @@ export default (state = INITIAL_STATE, action = {}) => {
                 ? {
                     ...field,
                     wateringLevel: field.wateringLevel + 1,
+                    isGrowing: true,
                 }
                 : field
             )
         })
     }
-       
+
+    if(action.type === HAS_GROWN){
+        return ({
+            ...state,
+            fields : state.fields.map(field => field.id === action.fieldId
+                ? {
+                    ...field,
+                    isGrowing: false,
+                }
+                : field
+            )
+        })
+    }
+
     return state
 }
