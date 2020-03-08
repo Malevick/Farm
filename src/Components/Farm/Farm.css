@@ -2,8 +2,43 @@
     margin: 10px;
     display: flex;
     flex-flow: row wrap;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     padding: 20px;
     border: 2px white solid;
+    max-width: calc(340px*3) ;
+}
+
+[data-is="farm"] legend {
+    color: rgb(255, 184, 53);
+    font-size: 18px;
+    padding: 0px 10px;
+}
+
+[data-is="farm"] nav {
+    flex-basis: 100%;
+    padding: 10px;
+    color: rgb(255, 184, 53);
+}
+
+[data-is="farm"] nav ol {
+    list-style-type: none;
+    padding: 0px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+[data-is="farm"] nav li {
+    padding: 5px;
+}
+
+[data-is="farm"] nav .action-available {
+    border-bottom: 2px dotted transparent;
+}
+
+[data-is="farm"] nav .action-available:hover {
+    color: rgb(255, 241, 215);
+    border-bottom: 2px dotted rgb(255, 241, 215);
 }

@@ -1,24 +1,48 @@
-export const SEEDS_TYPES = [
-    {
-        name : "wheat",
-        cropTime : 1,
-        sellPrice : 5,
-        buyPrice : 2,
-    },
-    {
-        name : "corn",
-        cropTime : 2,
-        sellPrice : 12,
-        buyPrice : 4,
-    },
-]
+/**
+ * Seed Object
+ * @typedef {Object} Seed
+ * @property {string} name
+ * @property {Number} cropTime
+ * @property {Number} sellPrice
+ * @property {Number} buyPrice
+ * @property {Number} waterRequirements
+ */
 
-// initial state
+/**
+ * Marketplace initial state
+ * @typedef {Object} Marketplace
+ * @property {[Seed]} seedTypes
+ */
+
 export const INITIAL_STATE = {
-    seedTypes : SEEDS_TYPES
+    seedTypes : [
+        {
+            name : "wheat",
+            cropTime : 1,
+            sellPrice : 3,
+            buyPrice : 1,
+            waterRequirements : 3
+        },
+        {
+            name : "corn",
+            cropTime : 2,
+            sellPrice : 11,
+            buyPrice : 3,
+            waterRequirements : 9
+        },
+        {
+            name : "barley",
+            cropTime : 3,
+            sellPrice : 20,
+            buyPrice : 5,
+            waterRequirements : 15
+        },
+    ]
 }
 
-
+/**
+ * @param {Marketplace} state
+ */
 export default (state = INITIAL_STATE, action = {}) => {
     console.warn(state)
     console.warn(action)

@@ -1,12 +1,29 @@
 *{
   transition: 0.2s;
 }
+
 .App{
-  background-color: rgb(199, 222, 166);
+  background-color: rgb(98, 117, 54);
   width: 100vw;
   height: 100vh;
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
   align-items: center;
+}
+
+.action-available{
+  cursor: pointer;
+}
+
+.wheat{
+  background-color: #F5DEB3;
+}
+
+.corn{
+  background-color: #FBEC5D;
+}
+
+.barley{
+  background-color: #db8626;
 }

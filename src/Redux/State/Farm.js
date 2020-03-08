@@ -1,38 +1,100 @@
-// initial state
+/**
+ * @typedef {import('./Marketplace').Seed} Seed
+ */
+
+/**
+ * Field Object
+ * @typedef {Object} Field
+ * @property {Number} id
+ * @property {Seed} seedType
+ * @property {Number} wateringLevel
+ */
+
+/**
+ * Initial state of Farm
+ * @typedef {Object} Farm
+ * @property {Number} fieldBuyPrice 
+ * @property {[Field]} fields
+ * @property {Number} gold
+ * @property {Number} maxFields
+ */
 export const INITIAL_STATE = {
-    fields: [],
-    gold: 100
+    fieldBuyPrice: 50,
+    fields: [
+        {
+            id : 1,
+            seedType: null,
+            wateringLevel: 0,
+        }
+    ],
+    gold: 30,
+    maxFields : 5,
 }
 
 // actions types
-export const ADD_FIELD = '@farm-mariondz/Farm/ADD_FIELD';
-export const PLANT_SEEDS = '@farm-mariondz/Farm/PLANT_SEEDS';
-export const HARVEST = '@farm-mariondz/Farm/HARVEST'
+export const ADD_FIELD =    '@farm-mariondz/Farm/ADD_FIELD';
+export const PLANT_SEEDS =  '@farm-mariondz/Farm/PLANT_SEEDS';
+export const HARVEST =      '@farm-mariondz/Farm/HARVEST';
+export const WATER =        '@farm-mariondz/Farm/WATER';
 
 // actions creators
+/**
+ * addField :: -> Action
+ * @returns {{type : ADD_FIELD}}
+ * @callback addField
+ */
 export const addField = () => ({ type: ADD_FIELD })
 
-// @type SeedType {
-//    name :: String,
-//    cropTime :: Number,
-//    sellPrice :: Number,
-//    buyPrice :: Number
-// }
-//
-// plantSeeds :: (Number, SeedType) -> Action
+/**
+ * plantSeeds :: (Number, SeedType) -> Action
+ * @param {Number} fieldId 
+ * @param {Seed} seedType 
+ * @returns {{
+    * type : PLANT_SEEDS,
+    * seedType : Seed,
+    * field : Number
+ * }}
+ * @callback plantSeeds
+ */
 export const plantSeeds = (fieldId, seedType) => ({
     type: PLANT_SEEDS,
     seedType,
     fieldId,
 })
 
-// harvest :: Number -> Action
+/**
+ * harvest :: Number -> Action
+ * @param {Number} fieldId 
+ * @returns {{
+    * type : HARVEST,
+    * field : Number 
+ * }}
+ *  @callback harvest
+ */
 export const harvest = fieldId => ({
     type : HARVEST,
     fieldId,
 })
 
-// Farm :: (State, Action *) -> State
+/**
+ * water :: Number -> Action
+ * @param {Number} fieldId 
+ * @returns {{
+    * type : WATER,
+    * fieldId : Number 
+ * }}
+ *  @callback water
+ */
+export const water = fieldId => ({
+    type : WATER,
+    fieldId,
+})
+
+/**
+ * Farm :: (State, Action *) -> State
+ * @param {Farm} state
+ * @param {addField|harvest|plantSeeds|water} action
+ */
 export default (state = INITIAL_STATE, action = {}) => {
     console.warn(state)
     console.warn(action)
@@ -40,13 +102,31 @@ export default (state = INITIAL_STATE, action = {}) => {
     if (action.type === ADD_FIELD) {
         return ({
             ...state,
+            gold : state.gold - state.fieldBuyPrice,
             fields: [
                 ...state.fields,
                 {
-                    id : state.fields.length,
+                    id : state.fields.length + 1,
                     seedType: null,
+                    wateringLevel: 0,
                 }
             ],
+        })
+    }
+
+    if(action.type === HARVEST){
+        const field = state.fields.find(field => field.id === action.fieldId)
+        return ({
+            ...state,
+            gold : state.gold + field.seedType.sellPrice,
+            fields : state.fields.map(field => field.id === action.fieldId
+                ? {
+                    ...field,
+                    seedType : null,
+                    wateringLevel: 0,
+                }
+                : field
+            )
         })
     }
 
@@ -64,20 +144,18 @@ export default (state = INITIAL_STATE, action = {}) => {
         })
     }
 
-    if(action.type === HARVEST){
-        const field = state.fields.find(field => field.id === action.fieldId)
+    if(action.type === WATER){
         return ({
             ...state,
-            gold : state.gold + field.seedType.sellPrice,
             fields : state.fields.map(field => field.id === action.fieldId
                 ? {
                     ...field,
-                    seedType : null,
+                    wateringLevel: field.wateringLevel + 1,
                 }
                 : field
             )
         })
     }
-
+       
     return state
 }
