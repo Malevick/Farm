@@ -21,21 +21,24 @@ export const INITIAL_STATE = {
             cropTime : 1,
             sellPrice : 3,
             buyPrice : 1,
-            waterRequirements : 3
+            waterRequirements : 3,
+            growTime: 3,
         },
         {
             name : "corn",
             cropTime : 2,
             sellPrice : 11,
             buyPrice : 3,
-            waterRequirements : 9
+            waterRequirements : 9,
+            growTime: 10,
         },
         {
             name : "barley",
             cropTime : 3,
             sellPrice : 20,
             buyPrice : 5,
-            waterRequirements : 15
+            waterRequirements : 15,
+            growTime: 10,
         },
     ]
 }
@@ -44,7 +47,8 @@ export const INITIAL_STATE = {
  * @param {Marketplace} state
  */
 export default (state = INITIAL_STATE, action = {}) => {
-    console.warn(state)
-    console.warn(action)
+    // console.warn(state)
+    // console.warn(action)
+
     return state;
 }
